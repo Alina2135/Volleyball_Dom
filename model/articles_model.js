@@ -1,20 +1,21 @@
 export class ArticlesModel {
     constructor() {
-        this.articles = [
-            { id: 1, title: "Вступ до MVC", author: "Бірюк Аліна", year: 2025,
-              content: "Ця стаття пояснює основи архітектури MVC та її застосування у веб-розробці." },
-            { id: 2, title: "Основи JavaScript", author: "Петренко Ігор", year: 2024,
-              content: "Основні концепції JavaScript, включаючи змінні, функції та роботу з DOM." },
-            { id: 3, title: "Frontend у 2025 році", author: "Бірюк Аліна", year: 2025,
-              content: "Огляд тенденцій у фронтенд розробці, нові технології та інструменти." }
-        ];
+        this.apiURL = "https://volleyball-mvc-server-2.onrender.com/api/articles";
     }
 
-    getAllArticles() {
-        return this.articles;
+    async getAllArticles() {
+        try {
+            const response = await fetch(this.apiURL);
+            const articles = await response.json();
+            return articles;
+        } catch (error) {
+            console.error("Помилка при завантаженні статей:", error);
+            return []; // повертаємо порожній масив у разі помилки
+        }
     }
 
-    getArticlesByAuthor(author) {
-        return this.articles.filter(a => a.author === author);
+    async getArticlesByAuthor(author) {
+        const allArticles = await this.getAllArticles();
+        return allArticles.filter(a => a.author === author);
     }
 }
