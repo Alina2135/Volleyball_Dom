@@ -7,8 +7,9 @@ export class ArticlesView {
             item.className = "article-card";
             item.innerHTML = `
                 <h3>${article.title}</h3>
-                <p>Автор: <strong>${article.author}</strong></p>
-                <p>Рік: ${article.year}</p>
+                <p><strong>Автор:</strong> ${article.author}</p>
+                <p><strong>Рік:</strong> ${article.year}</p>
+                <p><em>${article.content}</em></p>
                 <hr>
             `;
             container.appendChild(item);
